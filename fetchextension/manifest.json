@@ -1,0 +1,16 @@
+{
+  "name": "jarhar",
+  "description": "jarhar",
+  "version": "0.7",
+  "permissions": [
+    "debugger"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_title": "jarhar"
+  },
+  "manifest_version": 2
+}
+
