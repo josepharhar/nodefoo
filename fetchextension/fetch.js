@@ -5,8 +5,10 @@ async function send() {
   const textOutput = document.querySelector('#textOutput');
   textOutput.value += `\nfetch('${textInput.value}')...\n`;
   console.log('sending runtime.evalute, tabId: ' + tabId + ', window.location.search: ' + window.location.search);
-  chrome.debugger.sendCommand({tabId: tabId}, 'Runtime.evaluate', {expression: `fetch('${textInput.value}')`}, result => {
-    console.log('Runtime.evaluate fetch result: ' + JSON.stringify(result))});
+  chrome.debugger.sendCommand({tabId: tabId}, 'Runtime.evaluate', {expression: `fetch('${textInput.value}')`, awaitPromise: true}, result =>
+    textOutput.value += 'result: ' + JSON.stringify(result, null, 2));
+    //textOutput.value += 'result: ' + JSON.stringify(JSON.parse(result), null, 2));
+    //console.log('Runtime.evaluate fetch result: ' + JSON.stringify(result))});
   /*try {
     const response = await fetch(textInput.value);
     textOutput.value += 'Response.url: ' + response.url + '\n';
@@ -19,9 +21,10 @@ async function send() {
 async function onEvent(debuggeeId, message, params) {
   const textOutput = document.querySelector('#textOutput');
   textOutput.value += 'onEvent()\n';
-  textOutput.value += '  debuggeeId: ' + JSON.stringify(debuggeeId);
-  textOutput.value += '  message: ' + JSON.stringify(message);
-  textOutput.value += '  params: ' + JSON.stringify(params);
+  textOutput.value += '  debuggeeId: ' + JSON.stringify(debuggeeId) + '\n';
+  textOutput.value += '  message: ' + JSON.stringify(message) + '\n';
+  textOutput.value += '  params: ' + JSON.stringify(params) + '\n';
+  textOutput.value += '\n';
 }
 
 window.addEventListener('load', function() {
@@ -50,6 +53,7 @@ window.addEventListener('load', function() {
   outputDiv.appendChild(textOutput);
 
   chrome.debugger.onEvent.addListener(onEvent);
+  chrome.debugger.sendCommand({tabId: tabId}, 'Network.enable', result => console.log('Network.enable returned: ' + JSON.stringify(result)));
 });
 
 window.addEventListener('unload', function() {
