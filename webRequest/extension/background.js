@@ -12,7 +12,7 @@ function logEvent(name, event) {
 function onBeforeSendHeaders(event) {
   logEvent('onBeforeSendHeaders', event);
   return {
-    cancel: false,
+    cancel: false
   };
 }
 
