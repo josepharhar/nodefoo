@@ -7,11 +7,11 @@ const wsPort = httpPort;
 
 const websocketServer = new ws.Server({noServer: true});
 websocketServer.on('connection', socket => {
-  socket.on('message', data => console.log('recieved message: ' + data));
+  /*socket.on('message', data => console.log('recieved message: ' + data));
   socket.on('ping', data => console.log('received ping: ' + data));
   socket.on('pong', data => console.log('recieved pong: ' + data));
 
-  console.log('new connection');
+  console.log('new connection');*/
 
   socket.send('sending 300 byte array...');
   const array = new Uint8Array(300);
