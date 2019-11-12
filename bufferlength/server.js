@@ -37,7 +37,7 @@ class CustomTransformer extends stream.Transform {
   const filesize = fs.statSync(filename).size;
   console.log('filesize: ' + filesize);
   const readstream = fs.createReadStream(filename, {
-    encoding: 'binary'
+    //encoding: 'binary'
   });
 
   readstream
