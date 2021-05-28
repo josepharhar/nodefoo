@@ -8,7 +8,7 @@
     "puppeteer": "^1.16.0",
     "puppeteer-core": "^1.11.0",
     "typescript": "^3.2.2",
-    "ws": "^6.1.2"
+    "ws": "^7.4.5"
   },
   "dependencies": {
     "cors": "^2.8.5",
